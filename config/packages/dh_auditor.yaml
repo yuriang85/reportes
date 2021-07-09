@@ -1,0 +1,28 @@
+# Full configuration reference available at:
+# https://damienharper.github.io/auditor-docs/docs/auditor-bundle/configuration/reference.html
+dh_auditor:
+    enabled: true
+    timezone: 'America/Havana'
+    # Invokable service (callable) that checks roles
+    role_checker: 'dh_auditor.role_checker'
+
+    # Invokable service (callable) that provides user information
+    user_provider: 'dh_auditor.user_provider'
+
+    # Invokable service (callable) that provides security information (IP, firewall name, etc)
+    security_provider: 'dh_auditor.security_provider'  
+    providers:
+        doctrine:
+            table_prefix: null
+            table_suffix: '_audit'
+            viewer: true
+            entities:
+                App\Entity\User:
+                    enabled: true          # auditing of this entity is disabled
+                    ignored_columns:      # properties ignored by the audit process
+                        - fechaAlta
+                        - fechaUpdate
+                    view:                   #https://192.168.1.16:8004/audit
+                        - 'ROLE_USER'
+                        - 'ROLE_ADMIN'
+#                App\Entity\MyEntity2: ~     # auditing of this entity is enabled
