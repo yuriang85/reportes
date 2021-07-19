@@ -58,6 +58,7 @@ security:
                 target: app_login
 
     access_control:
+        # ROLE_USER -> usuario Gral | ROLE_ADMIN -> Administrador | ROLE_TEC -> perfil tecnico
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         #- { path: ^/, roles: ROLE_ADMIN }
         - { path: ^/admin, roles: ROLE_ADMIN }

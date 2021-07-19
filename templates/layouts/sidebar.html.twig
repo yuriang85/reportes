@@ -1,0 +1,51 @@
+{% set home = '' %}
+{% set usuarios = '' %}
+
+{% if app.request.attributes.get('_route') == 'home' %}
+{% set home = 'active' %}
+{% endif %}
+
+
+<div id="sidebar" class='active'>
+	<div class="sidebar-wrapper active">
+		<div class="sidebar-header">
+			<img src="{{ asset('voler-master/dist/assets/images/logo.svg') }}" alt="" srcset="">
+		</div>
+
+		<div class="sidebar-menu">
+			<ul class="menu">
+
+
+				<li class='sidebar-title'>Main Menu</li>
+
+
+				<li class="sidebar-item {{ home }} ">
+					<a href="{{ path('home') }}" class='sidebar-link'>
+						<i data-feather="home" width="20"></i>
+						<span>Inicio</span>
+					</a>
+
+				</li>
+
+				<!-- incluir menu admin (role=admin)-->
+
+				{% if is_granted('ROLE_ADMIN') %}
+					{% include "layouts/menu/menuAdmin.html.twig" %}
+
+				{% elseif is_granted('ROLE_TEC') %}
+					{% include "layouts/menu/menuTecnico.html.twig" %}
+
+				{% elseif is_granted('ROLE_USER') %}
+					{% include "layouts/menu/menuUser.html.twig" %}
+
+				{% endif %}
+				<!-- END -->
+
+			</ul>
+		</div>
+		<button class="sidebar-toggler btn x">
+			<i data-feather="x"></i>
+		</button>
+	</div>
+</div>
+

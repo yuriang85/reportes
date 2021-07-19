@@ -1,0 +1,45 @@
+[
+  {
+    "name": "Main Menu",
+    "isTitle": true
+  },
+  {
+    "name": "Dashboard",
+    "url": "index.html",
+    "icon": "home"
+  },
+  {
+    "name": "Components",
+    "key": "component",
+    "icon": "triangle",
+    "submenu": [
+      {
+        "name": "Alert",
+        "url": "component-alert.html"
+      },
+      {
+        "name": "Alert",
+        "url": "component-alert.html"
+      }
+    ]
+  },
+  {
+    "name": "Forms & Tables",
+    "isTitle": true
+  },
+  {
+    "name": "Form Elements",
+    "key": "form-element",
+    "icon": "file-text",
+    "submenu": [
+      {
+        "name": "Input",
+        "url": "form-element-input.html"
+      },
+      {
+        "name": "Input Group",
+        "url": "form-element-input-group.html"
+      }
+    ]
+  }
+]

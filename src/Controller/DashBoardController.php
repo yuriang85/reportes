@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\Json;
 
 class DashBoardController extends AbstractController
 {
@@ -13,8 +14,10 @@ class DashBoardController extends AbstractController
      */
     public function index(): Response
     {
+
         return $this->render('dash_board/index.html.twig', [
             'controller_name' => 'DashBoardController',
+
         ]);
     }
 }

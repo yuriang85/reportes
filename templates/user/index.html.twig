@@ -1,47 +1,80 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}User index{% endblock %}
+{%  set title = "Usuarios" %}
 
-{% block body %}
-    <h1>User index</h1>
+{% block styles %}
+	<link rel="stylesheet" href="voler-master/dist/assets/vendors/simple-datatables/style.css">
+{% endblock %}
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Email</th>
-                <th>Roles</th>
-                <th>Nombre</th>
-                <th>Apellidos</th>
-                <th>Activo</th>
-                <th>Ocupacion</th>
-                <th>Usertype</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for user in users %}
-            <tr>
-                <td>{{ user.id }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-                <td>{{ user.nombre }}</td>
-                <td>{{ user.apellidos }}</td>
-                <td>{{ user.activo ? 'Yes' : 'No' }}</td>
-                <td>{{ user.ocupacion }}</td>
-                <td>{{ user.usertype }}</td>
-                <td>
-                    <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="14">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+{% block content %}
 
-    <a href="{{ path('user_new') }}">Create new</a>
+	<div class="main-content container-fluid">
+		<div class="page-title">
+			<div class="row">
+				<div class="col-12 col-md-6 order-md-1 order-last">
+					<h3>Datatable</h3>
+					<p class="text-subtitle text-muted">We use 'simple-datatables' made by @fiduswriter. You can check the full documentation
+						<a href="https://github.com/fiduswriter/Simple-DataTables/wiki">here</a>.</p>
+				</div>
+				<div class="col-12 col-md-6 order-md-2 order-first">
+					<nav aria-label="breadcrumb" class='breadcrumb-header'>
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item">
+								<a href="index.html">Dashboard</a>
+							</li>
+							<li class="breadcrumb-item active" aria-current="page">Datatable</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+
+		<section class="section">
+			<div class="card">
+				<div class="card-header">
+					Simple Datatable
+				</div>
+				<div class="card-body">
+					<table class='table table-striped' id="table1">
+						<thead>
+							<tr>
+								<th>Email</th>
+								<th>Nombre</th>
+								<th>Apellidos</th>
+								<th>Activo</th>
+								<th>actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for user in Users %}
+								<tr>
+									<td>{{ user.email }}</td>
+									<td>{{ user.nombre }}</td>
+									<td>{{ user.apellidos }}</td>
+									<td>{{ user.activo ? 'Yes' : 'No' }}</td>
+									<td>
+										<a href="{{ path('user_show', {'id': user.id}) }}">show</a>
+										<a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+									</td>
+								</tr>
+							{% else %}
+								<tr>
+									<td colspan="14">no records found</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+					<a href="{{ path('user_new') }}">Create new</a>
+				</div>
+			</div>
+
+		</section>
+	</div>
+
+{% endblock %}
+
+{% block js %}
+<script src="{{ asset('voler-master/dist/assets/vendors/simple-datatables/simple-datatables.js') }}"></script>
+<script src="{{ asset('voler-master/dist/assets/js/vendors.js') }}"></script>
+{{ parent() }}
 {% endblock %}

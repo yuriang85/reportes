@@ -1,19 +1,49 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {# Run `composer require symfony/webpack-encore-bundle`
-           and uncomment the following Encore helpers to start using Symfony UX #}
-        {% block stylesheets %}
-            {#{{ encore_entry_link_tags('app') }}#}
-        {% endblock %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {%  set web_title = "Reportes" %}
+    <title>{{ title }} - {{ web_title }}</title>
+
+        {% block stylesfirst %}{% endblock %}
+
+        <link rel="stylesheet" href="{{ asset('voler-master/dist/assets/css/bootstrap.css') }}">
+
+        {% block styles %}{% endblock %}
+
+        <link rel="stylesheet" href="{{ asset('voler-master/dist/assets/vendors/perfect-scrollbar/perfect-scrollbar.css')}}">
+        <link rel="stylesheet" href="{{ asset('voler-master/dist/assets/css/app.css') }}">
+        <link rel="shortcut icon" href="{{ asset('voler-master/dist/assets/images/favicon.svg') }}" type="image/x-icon">
 
         {% block javascripts %}
-            {#{{ encore_entry_script_tags('app') }}#}
+        {#{{ encore_entry_script_tags('app') }}#}
         {% endblock %}
+
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <div id="app">
+
+            {% include "layouts/sidebar.html.twig" %}
+
+            <div id="main">
+                {% block includes %}{% include 'layouts/navbar.html.twig' %}{% endblock %}
+
+                {% block content %}{% endblock %}
+
+                {% block footer %}{% include 'layouts/footer.html.twig' %}{% endblock %}
+            </div>
+        </div>
+
+        <script src="{{ asset('voler-master/dist/assets/js/feather-icons/feather.min.js') }}"></script>
+        <script src="{{ asset('voler-master/dist/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
+        <script src="{{ asset('voler-master/dist/assets/js/app.js') }}"></script>
+        {% block js %}
+        {#---------------#}
+        {% endblock %}
+        <script src="{{ asset('voler-master/dist/assets/js/main.js') }}"></script>
+        <!-- fos js routing plugins (usar rutass para peticiones ajax)-->
+        <script src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
+        <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
     </body>
 </html>
